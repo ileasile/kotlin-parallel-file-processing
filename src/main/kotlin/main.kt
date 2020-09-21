@@ -14,7 +14,6 @@ class TextFileProcessor(
     private fun out(result: Long) {
         output.write(result.toString())
         output.write("\n")
-        output.flush()
     }
 
     @Suppress("UNUSED_PARAMETER")
