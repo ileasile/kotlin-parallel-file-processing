@@ -31,13 +31,12 @@ class TextFileProcessor(
         return num
     }
 
-    @ExperimentalCoroutinesApi
     fun process() = runBlocking {
         var outJob: Job? = null
         input.forEachLine { line ->
             val deferred = async { processLine(line) }
             val prevOutJob = outJob
-            val thisOutJob = launch (start = CoroutineStart.LAZY) { out(deferred.getCompleted()) }
+            val thisOutJob = launch (start = CoroutineStart.LAZY) { out(deferred.await()) }
             outJob = thisOutJob
             deferred.invokeOnCompletion {
                 if (prevOutJob == null) thisOutJob.start()

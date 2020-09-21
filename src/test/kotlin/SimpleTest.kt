@@ -1,9 +1,7 @@
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.io.File
 
-@ExperimentalCoroutinesApi
 class SimpleTest {
 
     @Test
