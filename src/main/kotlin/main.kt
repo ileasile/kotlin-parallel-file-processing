@@ -34,7 +34,7 @@ class TextFileProcessor(
     fun process() = runBlocking {
         var outJob: Job? = null
         input.forEachLine { line ->
-            val deferred = async { processLine(line) }
+            val deferred = async(Dispatchers.Default) { processLine(line) }
             val prevOutJob = outJob
             val thisOutJob = launch (start = CoroutineStart.LAZY) { out(deferred.await()) }
             outJob = thisOutJob
